@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const Invoice = () => {
@@ -5,6 +6,30 @@ const Invoice = () => {
   const [tableData, setTableData] = useState([]);
   const [total, setTotal] = useState(0);
 
+  const [data, setData] = useState({});
+
+  function handleDataChange(e) {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+
+    console.log(data);
+  }
+
+  async function handlePdfCreationTask() {
+    try {
+      const res = await axios.post("/api/v1/invoice/createInvoice", {
+        data,
+        tableData,
+        total,
+      });
+      console.log(res);
+    } catch (error) {
+      console.log("error is ", error);
+    }
+  }
   let rest = [];
   const handlechange = (e, id) => {
     let obj = tableData.filter((el) => {
@@ -101,6 +126,8 @@ const Invoice = () => {
               type="text"
               cols={30}
               rows={5}
+              name="soldBy"
+              onChange={handleDataChange}
               className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
               placeholder={` Varasiddhi Silk Exports \n 75, 3rd Cross, Lalbagh Road \n BENGALURU, KARNATAKA, 560027 \n IN `}
             />
@@ -112,12 +139,16 @@ const Invoice = () => {
               type="text"
               cols={40}
               rows={7}
+              name="billingAddress"
+              onChange={handleDataChange}
               className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300 "
               placeholder={`Madhu B  \n  Eurofins IT Solutions India Pvt Ltd., 1st Floor, Maruti Platinum,\n  Lakshminarayana Pura, AECS Layou \n BENGALURU, KARNATAKA, 560037 \nIN \n  `}
             />
             <div>
               <span className="font-semibold">State/UT Code</span>
               <input
+                name="billingAddresscode"
+                onChange={handleDataChange}
                 type="number"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder="29"
@@ -128,6 +159,8 @@ const Invoice = () => {
             <div>
               <span className="font-semibold">PAN No: </span>
               <input
+                name="panNo"
+                onChange={handleDataChange}
                 type="text"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder="AACFV3325K"
@@ -136,6 +169,8 @@ const Invoice = () => {
             <div>
               <span className="font-semibold">GST Registration No: </span>
               <input
+                name="gstRegisterationNo"
+                onChange={handleDataChange}
                 type="text"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder="29AACFV3325K1ZY"
@@ -146,6 +181,8 @@ const Invoice = () => {
           <div>
             <h2 className="font-semibold">Shipping Address:</h2>
             <textarea
+              name="shippingAddress"
+              onChange={handleDataChange}
               type="text"
               cols={40}
               rows={7}
@@ -155,6 +192,8 @@ const Invoice = () => {
             <div>
               <span className="font-semibold">State/UT Code</span>
               <input
+                name="shipingAddressCode"
+                onChange={handleDataChange}
                 type="number"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder="29"
@@ -168,6 +207,8 @@ const Invoice = () => {
             <p>
               Order Number:{" "}
               <input
+                name="orderNumber"
+                onChange={handleDataChange}
                 type="text"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder=" 403-3225714-7676307"
@@ -176,6 +217,8 @@ const Invoice = () => {
             <p>
               Order Date:{" "}
               <input
+                name="orderDate"
+                onChange={handleDataChange}
                 type="date"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder="29"
@@ -186,6 +229,8 @@ const Invoice = () => {
             <p>
               Place of Supply:{" "}
               <input
+                name="supplyPlace"
+                onChange={handleDataChange}
                 type="text"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder="KARNATAKA"
@@ -194,6 +239,8 @@ const Invoice = () => {
             <p>
               Place of Delivery:{" "}
               <input
+                name="deliveryPlace"
+                onChange={handleDataChange}
                 type="text"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder="KARNATAKA"
@@ -202,6 +249,8 @@ const Invoice = () => {
             <p>
               Invoice Number:{" "}
               <input
+                name="invoiceNumber"
+                onChange={handleDataChange}
                 type="text"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder=" IN-761 "
@@ -210,6 +259,8 @@ const Invoice = () => {
             <p>
               Invoice Details:{" "}
               <input
+                name="invoiceDetails"
+                onChange={handleDataChange}
                 type="text"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
                 placeholder="KA-310565025-1920"
@@ -218,6 +269,8 @@ const Invoice = () => {
             <p>
               Invoice Date:{" "}
               <input
+                name="invoiceDate"
+                onChange={handleDataChange}
                 type="date"
                 className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
               />
@@ -468,6 +521,10 @@ const Invoice = () => {
             <p>Authorized Signatory</p>
           </div>
         </div>
+      </div>
+
+      <div className="px-10">
+        <button onClick={handlePdfCreationTask}>Go to Pdf</button>
       </div>
       {/* </div> */}
     </div>

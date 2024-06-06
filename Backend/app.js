@@ -6,6 +6,9 @@ const PORT = 3000;
 
 var pdf = require("pdf-creator-node");
 
+
+app.use(express.json())
+
 const generatePdf = (data) => {
 
 
@@ -105,6 +108,9 @@ const generatePdf = (data) => {
             width: 800px;
             font-size: 14px;
         }
+        .fontbold {
+        font-weight : 700;
+        }
     </style>
 </head>
 
@@ -118,29 +124,23 @@ const generatePdf = (data) => {
         <table class="TableContainer" cellSpacing="10px">
             <tr>
                 <td>
-                    <strong>Sold By:</strong><br>
-                    Varasiddhi Silk Exports<br>
-                    75, 3rd Cross, Lalbagh Road<br>
-                    BENGALURU, KARNATAKA, 560027<br>
-                    IN<br>
+
+                    <h3>Sold By : </h3><br>
+                    {{this.data.soldBy}}<br>
 
                 </td>
                 <td>
-                    <strong>Billing Address:</strong><br>
-                    Madhu B<br>
-                    Eurofins IT Solutions India Pvt Ltd., 1st Floor,<br>
-                    Maruti Platinum, Lakshminarayana Pura, AECS Layout<br>
-                    BENGALURU, KARNATAKA, 560037<br>
-                    IN<br>
-                    State/UT Code: 29
+                <h3>Billing Address : </h3><br>
+                     {{this.data.billingAddress}}<br>
+                    <span>State/UT Code</span>: {{this.data.billingAddresscode}}
                 </td>
             </tr>
 
             <tr>
                 <td align="start">
 
-                    PAN No: AACFV3325K<br>
-                    GST Registration No: 29AACFV3325K1ZY
+                    <h3>PAN No:  </h3> {{this.data.panNo}}<br>
+                    <h3>GST Registration No: </h3>  {{this.data.gstRegisterationNo}}
 
 
 
@@ -148,20 +148,18 @@ const generatePdf = (data) => {
                 <td>
                     <div>
                         <div class="">
-                            <strong>Shipping Address:</strong>
-                            Madhu B<br>
-                            Eurofins IT Solutions India Pvt Ltd., 1st Floor,<br>
-                            Maruti Platinum, Lakshminarayana Pura, AECS Layout<br>
-                            BENGALURU, KARNATAKA, 560037<br>
-                            IN
+                            <h3>Shipping Address:</h3>
+                            {{this.data.shippingAddress}}<br>
+                            <span>State/UT Code</span>: {{this.data.shipingAddressCode}}
                         </div>
                         <div class="">
-                            <span>Order Number:</span> 403-3225714-7676307<br>
-                            <span>Order Date:</span> 28.10.2019<br>
-                            <span>Place of Supply:</span> KARNATAKA<br>
-                            <span>Place of Delivery:</span> KARNATAKA<br>
-                            <span>Invoice Number:</span> IN-761<br>
-                            <span>Invoice Date:</span> 28.10.2019
+                            <span class="fontbold">Order Number:</span>{{this.data.orderNumber}} <br>
+                            <span class="fontbold">Order Date:</span> {{this.data.shipingAddressCode}}<br>
+                            <span class="fontbold">Place of Supply:</span> {{this.data.supplyPlace}}<br>
+                            <span class="fontbold">Place of Delivery:</span> {{this.data.deliveryPlace}}<br>
+                            <span class="fontbold">Invoice Number:</span> {{this.data.invoiceNumber}}<br>
+                            <span class="fontbold">Invoice Detail:</span>{{this.data.invoiceDetails}}<br>
+                            <span class="fontbold">Invoice Date:</span>{{this.data.invoiceDate}}
                         </div>
                     </div>
                 </td>
@@ -169,70 +167,70 @@ const generatePdf = (data) => {
 
         </table>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Sl. No</th>
-                    <th>Description</th>
-                    <th>Unit Price</th>
-                    <th>Qty</th>
-                    <th>Net Amount</th>
-                    <th>Tax Rate</th>
-                    <th>Tax Type</th>
-                    <th>Tax Amount</th>
-                    <th>Total Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Varasiddhi Silks Men's Formal Shirt (SH-05-42, Navy Blue, 42)<br>B07KGF3KW8 ( SH-05-42 )</td>
-                    <td>₹338.10</td>
-                    <td>1</td>
-                    <td>₹338.10</td>
-                    <td>2.5%</td>
-                    <td>CGST</td>
-                    <td>₹8.45</td>
-                    <td>₹365.00</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>Shipping Charges</td>
-                    <td>₹30.96</td>
-                    <td>1</td>
-                    <td>₹30.96</td>
-                    <td>2.5%</td>
-                    <td>CGST</td>
-                    <td>₹0.77</td>
-                    <td>₹32.50</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Varasiddhi Silks Men's Formal Shirt (SH-05-40, Navy Blue, 40)<br>B07KGCS2X7 ( SH-05-40 )</td>
-                    <td>₹338.10</td>
-                    <td>1</td>
-                    <td>₹338.10</td>
-                    <td>2.5%</td>
-                    <td>CGST</td>
-                    <td>₹8.45</td>
-                    <td>₹365.00</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>Shipping Charges</td>
-                    <td>₹30.96</td>
-                    <td>1</td>
-                    <td>₹30.96</td>
-                    <td>2.5%</td>
-                    <td>CGST</td>
-                    <td>₹0.77</td>
-                    <td>₹32.50</td>
-                </tr>
-                <tr>
-                    <td colspan="8" class="total">Total:</td>
-                    <td>₹1,195.00</td>
-                </tr>
-            </tbody>
+        <table border>
+        <thead>
+            <tr>
+                <th>Sl. No</th>
+                <th>Description</th>
+                <th>Unit Price</th>
+                <th>Qty</th>
+                <th>Net Amount</th>
+                <th>Tax Rate</th>
+                <th>Tax Type</th>
+                <th>Tax Amount</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each this.tableData}}
+            <tr>
+                <td rowSpan="4">{{this.id}}</td>
+                <td>
+                     {{this.Description}}
+                </td>
+                <td>₹{{this.unitPrice}}</td>
+                <td>{{this.quantity}}</td>
+                <td>₹{{this.netAmount}}</td>
+                <td>{{this.fcgst}}%</td>
+                <td>CGST</td>
+                <td>₹{{this.ftaxcgstAmout}}</td>
+                <td rowSpan="2">₹{{this.ftotalAmount}}</td> 
+            </tr>
+            <tr>
+                <td className="no-border"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{this.fsgst}}%</td>
+                <td>SGST</td>
+                <td>₹{{this.ftaxsgstAmout}}</td>
+            </tr>
+            <tr>
+                <td className="no-border">Shipping Charges</td>
+                <td>₹{{this.unitTax}}</td>
+                <td></td>
+                <td>₹{{this.netTax}}</td>
+                <td>{{this.scgst:}}%</td>
+                <td>CGST</td>
+                <td>₹{{this.staxcgstAmout}}</td>
+            </tr>
+            <tr>
+                <td className="no-border"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{this.ssgst}}%</td>
+                <td>SGST</td>
+                <td>₹{{this.staxsgstAmout}}</td>
+            </tr>
+
+            {{/each}}
+
+            <tr className="total-row">
+                <td colSpan="8"  >TOTAL:</td>
+                <td>₹1195.00</td>
+            </tr>
+        </tbody>
         </table>
 
         <div class="amount-words">
@@ -284,7 +282,8 @@ const generatePdf = (data) => {
     var document = {
         html: htmlt,
         data: {
-            // fields
+            tableData: [...data.tableData],
+            ...data,
         },
         path: `./Public/files/output.pdf`,
         type: "",
@@ -319,8 +318,10 @@ const generatePdf = (data) => {
 
 
 app.post('/api/v1/invoice/createInvoice', (req, res) => {
+    const data = req.body;
+    console.log(data);
 
-    generatePdf()
+    generatePdf(data)
 
     res.status(200).send({
         status: "success",
