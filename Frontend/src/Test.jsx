@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Invoice = () => {
+  const [count, setCount] = useState(0);
+
   return (
     <div className="max-w-4xl mx-auto p-4 border rounded shadow-lg">
       <div className="flex justify-between items-center">
-        <img
-          src="https://via.placeholder.com/150x50"
-          alt="Amazon Logo"
-          className="h-12"
-        />
+        <div>
+          <p>click to select image for logo &darr;</p>
+          <label htmlFor="logo" className="">
+            <img
+              src="https://via.placeholder.com/150x50"
+              alt="Amazon Logo"
+              className="h-12 hover:scale-105 hover:bg-black hover:cursor-pointer"
+            />
+          </label>
+          <input type="file" id="logo" hidden />
+        </div>
         <div className="text-right">
           <h1 className="text-xl font-bold">
             Tax Invoice/Bill of Supply/Cash Memo
@@ -21,144 +29,230 @@ const Invoice = () => {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <h2 className="font-semibold">Sold By:</h2>
-            <p>Varasiddhi Silk Exports</p>
-            <p>75, 3rd Cross, Lalbagh Road</p>
-            <p>BENGALURU, KARNATAKA, 560027</p>
-            <p>IN</p>
+            <textarea
+              type="text"
+              cols={30}
+              rows={5}
+              className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+              placeholder={` Varasiddhi Silk Exports \n 75, 3rd Cross, Lalbagh Road \n BENGALURU, KARNATAKA, 560027 \n IN `}
+            />
           </div>
           <div>
             <h2 className="font-semibold">Billing Address:</h2>
-            <p>Madhu B</p>
-            <p>
-              Eurofins IT Solutions India Pvt Ltd., 1st Floor, Maruti Platinum,
-              Lakshminarayana Pura, AECS
-            </p>
-            <p>Layou</p>
-            <p>BENGALURU, KARNATAKA, 560037</p>
-            <p>IN</p>
-            <p>State/UT Code: 29</p>
+
+            <textarea
+              type="text"
+              cols={40}
+              rows={7}
+              className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300 "
+              placeholder={`Madhu B  \n  Eurofins IT Solutions India Pvt Ltd., 1st Floor, Maruti Platinum,\n  Lakshminarayana Pura, AECS Layou \n BENGALURU, KARNATAKA, 560037 \nIN \n  `}
+            />
+            <div>
+              <span className="font-semibold">State/UT Code</span>
+              <input
+                type="number"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder="29"
+              />
+            </div>
           </div>
           <div>
-            <p>PAN No: AACFV3325K</p>
-            <p>GST Registration No: 29AACFV3325K1ZY</p>
+            <div>
+              <span className="font-semibold">PAN No: </span>
+              <input
+                type="text"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder="AACFV3325K"
+              />
+            </div>
+            <div>
+              <span className="font-semibold">GST Registration No: </span>
+              <input
+                type="text"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder="29AACFV3325K1ZY"
+              />
+            </div>
           </div>
 
           <div>
             <h2 className="font-semibold">Shipping Address:</h2>
-            <p>Madhu B</p>
-            <p>
-              Eurofins IT Solutions India Pvt Ltd., 1st Floor, Maruti Platinum,
-              Lakshminarayana Pura, AECS
-            </p>
-            <p>Layou</p>
-            <p>BENGALURU, KARNATAKA, 560037</p>
-            <p>IN</p>
-            <p>State/UT Code: 29</p>
+            <textarea
+              type="text"
+              cols={40}
+              rows={7}
+              className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300 "
+              placeholder={`Madhu B  \n  Eurofins IT Solutions India Pvt Ltd., 1st Floor, Maruti Platinum,\n  Lakshminarayana Pura, AECS Layou \n BENGALURU, KARNATAKA, 560037 \nIN \n  `}
+            />
+            <div>
+              <span className="font-semibold">State/UT Code</span>
+              <input
+                type="number"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder="29"
+              />
+            </div>
           </div>
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-4">
           <div>
-            <p>Order Number: 403-3225714-7676307</p>
-            <p>Order Date: 28.10.2019</p>
+            <p>
+              Order Number:{" "}
+              <input
+                type="text"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder=" 403-3225714-7676307"
+              />
+            </p>
+            <p>
+              Order Date:{" "}
+              <input
+                type="date"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder="29"
+              />
+            </p>
           </div>
           <div>
-            <p>Invoice Number: IN-761</p>
-            <p>Invoice Details: KA-310565025-1920</p>
-            <p>Invoice Date: 28.10.2019</p>
+            <p>
+              Place of Supply:{" "}
+              <input
+                type="text"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder="KARNATAKA"
+              />
+            </p>
+            <p>
+              Place of Delivery:{" "}
+              <input
+                type="text"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder="KARNATAKA"
+              />
+            </p>
+            <p>
+              Invoice Number:{" "}
+              <input
+                type="text"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder=" IN-761 "
+              />
+            </p>
+            <p>
+              Invoice Details:{" "}
+              <input
+                type="text"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                placeholder="KA-310565025-1920"
+              />
+            </p>
+            <p>
+              Invoice Date:{" "}
+              <input
+                type="date"
+                className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+              />
+            </p>
           </div>
         </div>
       </div>
 
-      <table className="min-w-full mt-4 border border-1 border-gray-300">
+      <table className="table">
         <thead>
           <tr>
-            <th className="py-2 text-left">Sl. No</th>
-            <th className="py-2 text-left">Description</th>
-            <th className="py-2 text-left">Unit Price</th>
-            <th className="py-2 text-left">Qty</th>
-            <th className="py-2 text-left">Net Amount</th>
-            <th className="py-2 text-left">Tax Rate</th>
-            <th className="py-2 text-left">Tax Type</th>
-            <th className="py-2 text-left">Tax Amount</th>
-            <th className="py-2 text-left">Total Amount</th>
+            <th>Sl. No</th>
+            <th>Description</th>
+            <th>Unit Price</th>
+            <th>Qty</th>
+            <th>Net Amount</th>
+            <th>Tax Rate</th>
+            <th>Tax Type</th>
+            <th>Tax Amount</th>
+            <th>Total Amount</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="py-2">1</td>
-            <td className="py-2">
-              Varasiddhi Silks Men's Formal Shirt (SH-05-42, Navy Blue, 42)
+          {!count && (
+            <tr>
+              <td colSpan="9">
+                <div className="flex justify-around my-20">
+                  <div>Please enter how many details you have</div>
+                  <input
+                    type="number"
+                    placeholder="how many orders you have"
+                    className="p-2 focus:outline-none focus:border-1 focus:border focus:border-gray-300"
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      setCount(Number(e.target.value));
+                    }}
+                  />
+                </div>
+              </td>
+            </tr>
+          )}
+          {console.log(count)}
+          {count &&
+            Array(count)
+              .fill(" ")
+              .map((el, i) => {
+                console.log(el);
+                return (
+                  <React.Fragment key={i}>
+                    <tr>
+                      <td>1</td>
+                      <td>
+                        Varasiddhi Silks Men's Formal Shirt (SH-05-42, Navy
+                        Blue, 42)B07KGF3KW8 ( SH-05-42 )
+                      </td>
+                      <td>₹338.10</td>
+                      <td>1</td>
+                      <td>₹338.10</td>
+                      <td>2.5%</td>
+                      <td>CGST</td>
+                      <td>₹8.45</td>
+                      <td>₹365.00</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>Shipping Charges</td>
+                      <td>₹30.96</td>
+                      <td>1</td>
+                      <td>₹30.96</td>
+                      <td>2.5%</td>
+                      <td>CGST</td>
+                      <td>₹0.77</td>
+                      <td>₹32.50</td>
+                    </tr>
+                    <tr></tr>
+                  </React.Fragment>
+                );
+              })}
+
+          {/* <tr>
+            <td colSpan="8" className="">
+              Total:
             </td>
-            <td className="py-2">₹538.10</td>
-            <td className="py-2">1</td>
-            <td className="py-2">₹538.10</td>
-            <td className="py-2">2.5%</td>
-            <td className="py-2">CGST</td>
-            <td className="py-2">₹13.45</td>
-            <td className="py-2">₹565.00</td>
-          </tr>
-          <tr>
-            <td className="py-2">2</td>
-            <td className="py-2">Shipping Charges</td>
-            <td className="py-2">₹30.96</td>
-            <td className="py-2">1</td>
-            <td className="py-2">₹30.96</td>
-            <td className="py-2">2.5%</td>
-            <td className="py-2">CGST</td>
-            <td className="py-2">₹0.77</td>
-            <td className="py-2">₹32.50</td>
-          </tr>
-          <tr>
-            <td className="py-2">3</td>
-            <td className="py-2">
-              Varasiddhi Silks Men's Formal Shirt (SH-05-40, Navy Blue, 40)
-            </td>
-            <td className="py-2">₹538.10</td>
-            <td className="py-2">1</td>
-            <td className="py-2">₹538.10</td>
-            <td className="py-2">2.5%</td>
-            <td className="py-2">CGST</td>
-            <td className="py-2">₹13.45</td>
-            <td className="py-2">₹565.00</td>
-          </tr>
-          <tr>
-            <td className="py-2">4</td>
-            <td className="py-2">Shipping Charges</td>
-            <td className="py-2">₹30.96</td>
-            <td className="py-2">1</td>
-            <td className="py-2">₹30.96</td>
-            <td className="py-2">2.5%</td>
-            <td className="py-2">CGST</td>
-            <td className="py-2">₹0.77</td>
-            <td className="py-2">₹32.50</td>
-          </tr>
-          <tr>
-            <td colSpan="8" className="text-right font-bold py-2">
-              TOTAL:
-            </td>
-            <td className="py-2 font-bold">₹1195.00</td>
-          </tr>
+            <td>₹1,195.00</td>
+          </tr> */}
         </tbody>
       </table>
 
-      <div className="mt-4">
-        <p>
-          Amount in Words:{" "}
-          <span className="font-bold">
-            One Thousand One Hundred And Ninety-five only
-          </span>
-        </p>
-        <p>Whether tax is payable under reverse charge - No</p>
-        <div className="mt-4 flex justify-between items-center">
-          <div>
-            <p>For Varasiddhi Silk Exports:</p>
-            <div className="mt-8">
-              <p>Authorized Signatory</p>
-            </div>
+      <div className="amount-words">
+        <strong>Amount in Words:</strong> One Thousand One Hundred And
+        Ninety-five only
+      </div>
+
+      <p>Whether tax is payable under reverse charge - No</p>
+      <div className="mt-4 flex justify-between items-center">
+        <div>
+          <p>For Varasiddhi Silk Exports:</p>
+          <div className="mt-8">
+            <p>Authorized Signatory</p>
           </div>
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 };

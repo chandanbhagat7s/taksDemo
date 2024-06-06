@@ -15,7 +15,7 @@ const generatePdf = (data) => {
 
 
 
-    let fields = JSON.parse(data)
+    // let fields = JSON.parse(data)
 
 
     htmlt = `<!DOCTYPE html>
@@ -100,6 +100,11 @@ const generatePdf = (data) => {
         .footer p {
             margin: 5px 0;
         }
+
+        .TableContainer {
+            width: 800px;
+            font-size: 14px;
+        }
     </style>
 </head>
 
@@ -110,52 +115,59 @@ const generatePdf = (data) => {
             <div class="invoice-title">Tax Invoice/Bill of Supply/Cash Memo</div>
         </div>
 
-        <div class="details">
-            <div>
-                <strong>Sold By:</strong><br>
-                Varasiddhi Silk Exports<br>
-                75, 3rd Cross, Lalbagh Road<br>
-                BENGALURU, KARNATAKA, 560027<br>
-                IN<br>
+        <table class="TableContainer" cellSpacing="10px">
+            <tr>
+                <td>
+                    <strong>Sold By:</strong><br>
+                    Varasiddhi Silk Exports<br>
+                    75, 3rd Cross, Lalbagh Road<br>
+                    BENGALURU, KARNATAKA, 560027<br>
+                    IN<br>
 
-            </div>
-            <div>
-                <strong>Billing Address:</strong><br>
-                Madhu B<br>
-                Eurofins IT Solutions India Pvt Ltd., 1st Floor,<br>
-                Maruti Platinum, Lakshminarayana Pura, AECS Layout<br>
-                BENGALURU, KARNATAKA, 560037<br>
-                IN<br>
-                State/UT Code: 29
-            </div>
-        </div>
-
-        <div class="address">
-            <div>
-                PAN No: AACFV3325K<br>
-                GST Registration No: 29AACFV3325K1ZY
-            </div>
-
-            <div>
-                <div class="w-100">
-                    <strong>Shipping Address:</strong>
+                </td>
+                <td>
+                    <strong>Billing Address:</strong><br>
                     Madhu B<br>
                     Eurofins IT Solutions India Pvt Ltd., 1st Floor,<br>
                     Maruti Platinum, Lakshminarayana Pura, AECS Layout<br>
                     BENGALURU, KARNATAKA, 560037<br>
-                    IN
-                </div>
-                <div class="w-100">
-                    <span>Order Number:</span> 403-3225714-7676307<br>
-                    <span>Order Date:</span> 28.10.2019<br>
-                    <span>Place of Supply:</span> KARNATAKA<br>
-                    <span>Place of Delivery:</span> KARNATAKA<br>
-                    <span>Invoice Number:</span> IN-761<br>
-                    <span>Invoice Date:</span> 28.10.2019
-                </div>
-            </div>
+                    IN<br>
+                    State/UT Code: 29
+                </td>
+            </tr>
 
-        </div>
+            <tr>
+                <td align="start">
+
+                    PAN No: AACFV3325K<br>
+                    GST Registration No: 29AACFV3325K1ZY
+
+
+
+                </td>
+                <td>
+                    <div>
+                        <div class="">
+                            <strong>Shipping Address:</strong>
+                            Madhu B<br>
+                            Eurofins IT Solutions India Pvt Ltd., 1st Floor,<br>
+                            Maruti Platinum, Lakshminarayana Pura, AECS Layout<br>
+                            BENGALURU, KARNATAKA, 560037<br>
+                            IN
+                        </div>
+                        <div class="">
+                            <span>Order Number:</span> 403-3225714-7676307<br>
+                            <span>Order Date:</span> 28.10.2019<br>
+                            <span>Place of Supply:</span> KARNATAKA<br>
+                            <span>Place of Delivery:</span> KARNATAKA<br>
+                            <span>Invoice Number:</span> IN-761<br>
+                            <span>Invoice Date:</span> 28.10.2019
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
 
         <table class="table">
             <thead>
@@ -241,7 +253,7 @@ const generatePdf = (data) => {
 </body>
 
 </html>`;
-    let height = "8in";
+    let height = "11in";
     let width = '8in';
 
 
@@ -262,7 +274,7 @@ const generatePdf = (data) => {
 
         },
         footer: {
-            height: "3mm",
+            height: "1mm",
             contents: {
 
             }
@@ -300,14 +312,13 @@ const generatePdf = (data) => {
 
 
 
-});
-
-
-};
+}
 
 
 
-app.post('/createInvoice', (req, res) => {
+
+
+app.post('/api/v1/invoice/createInvoice', (req, res) => {
 
     generatePdf()
 
