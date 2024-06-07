@@ -195,6 +195,7 @@ const generatePdf = (data) => {
                 <td>CGST</td>
                 <td>₹{{this.ftaxcgstAmout}}</td>
                 <td rowSpan="2">₹{{this.ftotalAmount}}</td> 
+               
             </tr>
             <tr>
                 <td className="no-border"></td>
@@ -204,15 +205,16 @@ const generatePdf = (data) => {
                 <td>{{this.fsgst}}%</td>
                 <td>SGST</td>
                 <td>₹{{this.ftaxsgstAmout}}</td>
-            </tr>
-            <tr>
+                </tr>
+                <tr>
                 <td className="no-border">Shipping Charges</td>
                 <td>₹{{this.unitTax}}</td>
                 <td></td>
                 <td>₹{{this.netTax}}</td>
-                <td>{{this.scgst:}}%</td>
+                <td>{{this.scgst}}%</td>
                 <td>CGST</td>
                 <td>₹{{this.staxcgstAmout}}</td>
+                <td rowSpan="2">₹{{this.stotalAmount}}</td> 
             </tr>
             <tr>
                 <td className="no-border"></td>
@@ -228,13 +230,13 @@ const generatePdf = (data) => {
 
             <tr className="total-row">
                 <td colSpan="8"  >TOTAL:</td>
-                <td>₹1195.00</td>
+                <td>₹{{this.total}}</td>
             </tr>
         </tbody>
         </table>
 
         <div class="amount-words">
-            <strong>Amount in Words:</strong> One Thousand One Hundred And Ninety-five only
+            <strong>Amount in Words:{{this.inwords}}</strong>  
         </div>
 
         <div class="footer">

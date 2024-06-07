@@ -8,6 +8,82 @@ const Invoice = () => {
 
   const [data, setData] = useState({});
 
+  function convertNumberToWords(num) {
+    const ones = [
+      "",
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine",
+    ];
+    const teens = [
+      "eleven",
+      "twelve",
+      "thirteen",
+      "fourteen",
+      "fifteen",
+      "sixteen",
+      "seventeen",
+      "eighteen",
+      "nineteen",
+    ];
+    const tens = [
+      "",
+      "ten",
+      "twenty",
+      "thirty",
+      "forty",
+      "fifty",
+      "sixty",
+      "seventy",
+      "eighty",
+      "ninety",
+    ];
+    const thousands = ["", "thousand"];
+
+    if (num === 0) return "zero";
+
+    let word = "";
+
+    // Handle thousands place
+    if (Math.floor(num / 1000) > 0) {
+      word += ones[Math.floor(num / 1000)] + " " + thousands[1] + " ";
+      num %= 1000;
+    }
+
+    // Handle hundreds place
+    if (Math.floor(num / 100) > 0) {
+      word += ones[Math.floor(num / 100)] + " hundred ";
+      num %= 100;
+    }
+
+    // Handle tens place
+    if (num > 10 && num < 20) {
+      word += teens[num - 11] + " ";
+    } else {
+      if (Math.floor(num / 10) > 0) {
+        word += tens[Math.floor(num / 10)] + " ";
+      }
+      num %= 10;
+    }
+
+    // Handle ones place
+    if (num > 0) {
+      word += ones[num] + " ";
+    }
+
+    return word.trim();
+  }
+
+  // Example usage
+
+  // console.log(convertNumberToWords(number));
+
   function handleDataChange(e) {
     const { name, value } = e.target;
     setData({
@@ -20,10 +96,12 @@ const Invoice = () => {
 
   async function handlePdfCreationTask() {
     try {
+      const words = convertNumberToWords(total);
       const res = await axios.post("/api/v1/invoice/createInvoice", {
         data,
         tableData,
         total,
+        inwords: words,
       });
       console.log(res);
     } catch (error) {
